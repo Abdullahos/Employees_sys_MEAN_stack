@@ -18,7 +18,7 @@ export class EmployeeService {
   constructor(private httpClient: HttpClient) { }
 
   private refreshEmployees() {
-    this.httpClient.get<Employee[]>(this.base_url + '/').subscribe(
+    this.httpClient.get<Employee[]>(this.base_url + '/employees').subscribe(
       employees => {
         this.employees$.next(employees);
       }
@@ -43,6 +43,6 @@ export class EmployeeService {
   }
 
   deleteEmployee(id: string): Observable<string> {
-    return this.httpClient.delete(`{this.base_url}/${id}`, {responseType: 'text'});
+    return this.httpClient.delete(`${this.base_url}/employees/${id}`, {responseType: 'text'});
   } 
 }
