@@ -18,7 +18,7 @@ connectToDatabase(ATLAS_URI)
    .then(() => {
        const app = express();
        app.use(cors());
-       app.use("/employees", employeeRouter);
+       app.use("/employees", employeeRouter);   //tell express to use this router
 
        // start the Express server
        app.listen(5200, () => {
