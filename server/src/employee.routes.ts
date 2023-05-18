@@ -14,6 +14,23 @@ employeeRouter.get("/", async (_req, res) => {
    }
 });
 
+employeeRouter.get("/:id", async (req, res) => {
+    try {
+        const id = req?.params?.id;
+        const query = { _id: new mongodb.ObjectId(id) };
+        const employee = await collections.employees.findOne(query);
+  
+        if (employee) {
+            res.status(200).send(employee);
+        } else {
+            res.status(404).send(`Failed to find an employee: ID ${id}`);
+        }
+  
+    } catch (error) {
+        res.status(404).send(`Failed to find an employee: ID ${req?.params?.id}`);
+    }
+ });
+
 employeeRouter.post("/", async (req, res) => {
     try {
         const employee = req.body;
